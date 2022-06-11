@@ -5,10 +5,12 @@ require("dotenv").config();
 const path = require('path');
 // set up express
 
+var whitelist = ['https://facturavirtual.pe'] 
+
 const app = express();
 app.use(express.json());
 app.use(cors());
-var whitelist = ['https://facturavirtual.pe'] 
+
 const PORT = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV === 'production') {

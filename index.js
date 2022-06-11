@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'production') {
     );
 }
 
-app.listen(PORT, () => console.log(`The server has started on port: ${PORT}`));
+//app.listen(PORT, () => console.log(`The server has started on port: ${PORT}`));
 
 console.log(process.env.MONGODB_CONNECTION_STRING);
 

@@ -9,10 +9,10 @@ const path = require('path');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+//app.use(cors());
 //var whiteList = ['https://facturavirtual.pe']
 
-app.use(cors({origin:[]}))
+app.use(cors({origin:[]}));
 
 //const PORT = process.env.PORT || 5000;
 

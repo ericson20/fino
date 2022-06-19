@@ -4,12 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    
-    "server" :"nodemon server" ,
-    "client": "cd.. && cd frontend && npm start",
-    "dev": "concurrently \"npm start\" \" npm run client\""
+    "server" :"nodemon server"
   },
   "keywords": [],
   "author": "",

@@ -6,18 +6,18 @@ const Trans = require("../models/transModel");
 
 router.post("/create", async (req, res) => {
   try {
-    let { name, doc, description, customerId, amount, sellerId, type } = req.body;
-
+    let { name, doc, description, customerId, amount, sellerId, type, pdfLink } = req.body;
     const newTrans = new Trans({
       name: name,
       doc: doc,
       description: description,
       customerId: customerId,
       amount: amount,
+      pdfLink: pdfLink,
       sellerId: sellerId,
       type: type
     });
-    const savedTrans = await newTrans.save();
+    await newTrans.save();
     res.json({status: 200});
   } catch (err) {
     res.status(500).json({ msg: err.message });
@@ -42,6 +42,7 @@ router.get("/all/:id", async (req, res) => {
       amount: tran.amount,
       type: tran.type,
       date: tran.createdAt,
+      pdfLink: tran.pdfLink
     };
     tranMaps.push(tranMap);
   }));

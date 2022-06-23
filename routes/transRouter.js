@@ -53,12 +53,12 @@ router.get("/all/:id", async (req, res) => {
 router.post('/getpdf', async (req, res)=>{
 
   let {pdf} = req.body;
-  request.head(pdf, function (error, response, body) {
+  console.log(pdf)
+  request(pdf, function (error, response, body) {
     console.error('error:', error); // Print the error if one occurred
     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
     // console.log('body:', body); // Print the HTML for the Google homepage.
-
-    res.json(body)
+    res.send(body)
   });
 
 })

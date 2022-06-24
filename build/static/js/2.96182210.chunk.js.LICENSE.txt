@@ -4,30 +4,6 @@ object-assign
 @license MIT
 */
 
-/*! ./browser */
-
-/*! ./functions */
-
-/*! ./html */
-
-/*! ./image */
-
-/*! ./js/init */
-
-/*! ./json */
-
-/*! ./modal */
-
-/*! ./pdf */
-
-/*! ./print */
-
-/*! ./raw-html */
-
-/*! ./sass/index.scss */
-
-/*! ./src/index.js */
-
 /*! Moment Duration Format v2.2.2
      *  https://github.com/jsmreese/moment-duration-format
      *  Date: 2018-02-16
@@ -38,64 +14,6 @@ object-assign
      *  Copyright 2018 John Madhavan-Reese
      *  Released under the MIT license
      */
-
-/*! exports provided: addWrapper, capitalizePrint, collectStyles, addHeader, cleanUp, isRawHTML */
-
-/*! exports provided: default */
-
-/*! no static exports found */
-
-/*!**********************!*\
-        !*** ./src/index.js ***!
-        \**********************/
-
-/*!***********************!*\
-        !*** ./src/js/pdf.js ***!
-        \***********************/
-
-/*!************************!*\
-        !*** ./src/js/html.js ***!
-        \************************/
-
-/*!************************!*\
-        !*** ./src/js/init.js ***!
-        \************************/
-
-/*!************************!*\
-        !*** ./src/js/json.js ***!
-        \************************/
-
-/*!*************************!*\
-        !*** ./src/js/image.js ***!
-        \*************************/
-
-/*!*************************!*\
-        !*** ./src/js/modal.js ***!
-        \*************************/
-
-/*!*************************!*\
-        !*** ./src/js/print.js ***!
-        \*************************/
-
-/*!***************************!*\
-        !*** ./src/js/browser.js ***!
-        \***************************/
-
-/*!****************************!*\
-        !*** ./src/js/raw-html.js ***!
-        \****************************/
-
-/*!****************************!*\
-        !*** multi ./src/index.js ***!
-        \****************************/
-
-/*!*****************************!*\
-        !*** ./src/js/functions.js ***!
-        \*****************************/
-
-/*!*****************************!*\
-        !*** ./src/sass/index.scss ***!
-        \*****************************/
 
 /** @license MUI v5.1.1
  *

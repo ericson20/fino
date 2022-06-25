@@ -1,26 +1,31 @@
 const router = require("express").Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const Customer = require("../models/customerModel");
-
+const User = require("../models/userModel")
 
 router.post("/create", async (req, res) => {
   try {
     let { doc, name, direction, sellerId } = req.body;
-    const existingUser = await Customer.findOne({ name: name });
-
-    if (existingUser)
-      return res
-        .json({ msg: "An account with this name already exists.", status: 400 });
-
-    const newCustomer = new Customer({
-      name: name,
-      doc: doc,
-      direction: direction,
-      sellerId: sellerId,
-    });
-    const savedCustomer = await newCustomer.save();
-    res.json({status: 200});
+    const customers = await Customer.find({sellerId: sellerId});
+    let flag = false;
+    customers.map( async (customer, index)=>{
+      if(customer.name === name){
+        // res.json({ msg: "An account with this name already exists.", status: 400 });
+        flag = true;
+      }
+    })
+    if(flag){
+      res.json({ msg: "A customer with this name already exists.", status: 400 });
+    }else{
+      const newCustomer = new Customer({
+        name: name,
+        doc: doc,
+        direction: direction,
+        sellerId: sellerId,
+      });
+      const savedCustomer = await newCustomer.save();
+      res.json({status: 200});
+    }
+    
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }

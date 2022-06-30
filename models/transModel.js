@@ -8,9 +8,9 @@ const transSchema = new mongoose.Schema({
 	amount: { type: Number },
 	description: { type: String },
 	type: { type: String },
-	pdfLink: {type: String}
-},
-{ timestamps: { createdAt: true }},
+	pdfLink: {type: String},
+	createdAt : {type: String}
+}
 );
 
 module.exports = Trans = mongoose.model("trans", transSchema);

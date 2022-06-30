@@ -7,6 +7,7 @@ const request = require('request');
 router.post("/create", async (req, res) => {
   try {
     let { name, doc, description, customerId, amount, sellerId, type, pdfLink } = req.body;
+    const date = new Date();
     const newTrans = new Trans({
       name: name,
       doc: doc,
@@ -15,6 +16,7 @@ router.post("/create", async (req, res) => {
       amount: amount,
       pdfLink: pdfLink,
       sellerId: sellerId,
+      createdAt: date,
       type: type
     });
     await newTrans.save();

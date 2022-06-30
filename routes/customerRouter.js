@@ -4,7 +4,7 @@ const User = require("../models/userModel")
 
 router.post("/create", async (req, res) => {
   try {
-    let { doc, name, direction, sellerId } = req.body;
+    let { doc, name, direction, sellerId, docType } = req.body;
     const customers = await Customer.find({sellerId: sellerId});
     let flag = false;
     customers.map( async (customer, index)=>{
@@ -21,6 +21,7 @@ router.post("/create", async (req, res) => {
         doc: doc,
         direction: direction,
         sellerId: sellerId,
+        docType : docType
       });
       const savedCustomer = await newCustomer.save();
       res.json({status: 200});
@@ -45,7 +46,8 @@ router.get("/all/:id", async (req, res) => {
       doc: customer.doc,
       sellerId: customer.sellerId,
       date: customer.createdAt,
-      direction : customer.direction
+      direction : customer.direction,
+      docType: customer.docType
     };
     customerMaps.push(customerMap);
   }));

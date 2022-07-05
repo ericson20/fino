@@ -8,13 +8,13 @@ router.post("/create", async (req, res) => {
     const customers = await Customer.find({sellerId: sellerId});
     let flag = false;
     customers.map( async (customer, index)=>{
-      if(customer.name === name){
+      if(customer.doc === doc){
         // res.json({ msg: "An account with this name already exists.", status: 400 });
         flag = true;
       }
     })
     if(flag){
-      res.json({ msg: "A customer with this name already exists.", status: 400 });
+      res.json({ msg: "A customer with this number already exists.", status: 400 });
     }else{
       const newCustomer = new Customer({
         name: name,

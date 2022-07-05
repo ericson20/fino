@@ -7,8 +7,8 @@ const auth = require("../middleware/auth");
 router.post("/register", async (req, res) => {
   try {
     let { name, ruc, branch, token, email, vendor, process, credit, paid, password, docType} = req.body;
-    // const existingUser = await User.findOne({ email: { $regex : new RegExp("^" + email + "$")}});
-    const existingUser = await User.findOne({email : email});
+     const existingUser = await User.findOne({ email: { $regex : new RegExp(email, "i")}});
+    // const existingUser = await User.findOne({email : email});
     if (existingUser)
       return res
         .json({ msg: "An account with this ID already exists.", status: 400 });

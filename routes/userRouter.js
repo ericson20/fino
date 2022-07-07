@@ -39,9 +39,8 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    const user = await User.findOne({ email: email });
-    
+    const user = await User.findOne({ email: { $regex : new RegExp(email, "i")}});
+ 
     var activeStatus = false;
 
     if (user) {

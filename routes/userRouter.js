@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const auth = require("../middleware/auth");
+const { findOneAndUpdate } = require("../models/userModel");
 
 router.post("/register", async (req, res) => {
   try {
@@ -27,9 +28,18 @@ router.post("/register", async (req, res) => {
       token: token,
       email: email,
       password: passwordHash,
-      docType : docType === undefined ? [true, true, true] : [docType.invoice, docType.ticket, docType.note]
+      docType : docType === undefined ? [true, true, true] : [docType.invoice, docType.ticket, docType.note],
+      showCant: true,
+      directSale:false,
+      quickPrint:false,
+      showMultiItems:false,
+      formatShareA4:false,
+      formatPrintA4:false,
+      itemsIgv:false,
+      defaultText: '',
+      items: []
     });
-    const savedUser = await newUser.save();
+    await newUser.save();
     res.json({status: 200});
   } catch (err) {
     res.status(500).json({ msg: err.message });
@@ -61,11 +71,11 @@ router.post("/login", async (req, res) => {
         .json({ msg: "You are not actived.", status: 'No Active' });
 
     // when login is succes
-
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     res.json({
       msg:'Success',
       token,
+      directSale: user.directSale,
       email: user.email
     });
 
@@ -200,14 +210,51 @@ router.put('/update', async (req, res) => {
 });
 
 // Get User Information for invoice
-router.post('/info', async (req, res) => {
-  const { email } = req.body;
-  const user = await User.findOne({email: email});
-  res.json(user);
-});
 
 router.get('/getId/:id', async (req, res) => {
   const user = await User.findOne({email: req.params.id});
   res.json(user);
 });
+
+router.put('/updateProfile', async (req, res) => {
+  
+  const filter = { email: req.body.email };
+  const update = { showCant: req.body.showCant, directSale: req.body.directSale, quickPrint: req.body.quickPrint, showMultiItems: req.body.showMultiItems, formatShareA4: req.body.formatShareA4, formatPrintA4: req.body.formatPrintA4, itemsIgv: req.body.itemsIgv, defaultText: req.body.defaultText };
+  const user = await User.findOneAndUpdate(filter, update);
+  res.json(user);
+
+});
+
+router.post('/items/add', async (req, res) =>{
+  const filter = { email : req.body.email};
+  const update = req.body.item;
+  const result  = await User.findOneAndUpdate(filter, { $addToSet: { items: update }}, (err, doc, res)=> {
+    return doc;
+  });
+  res.json(result)
+})
+
+router.post('/items/delete', async(req, res)=>{
+  const filter = { email : req.body.email};
+  const update = req.body.item;
+  const result  = await User.findOneAndUpdate(filter, { $pull: { items: update }}, (err, doc, res)=> {
+    return doc;
+  });
+  res.json(result)
+})
+
+router.put('/items/update', async (req, res) => {
+  
+  const filter = { email : req.body.email};
+  const index = req.body.index;
+  const item = req.body.item;
+  const result = await User.findOne(filter);
+  result.items[index] = item
+
+  const up = await User.findOneAndUpdate(filter, result, (err, doc, res)=>{
+    return doc
+  });
+
+    res.json(up)
+})
 module.exports = router;

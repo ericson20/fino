@@ -12,7 +12,16 @@ const userSchema = new mongoose.Schema({
 	credit: { type: Number },
 	paid: { type: Number },
 	active_status: { type: Boolean, default: true },
-	docType : {type: Array }
+	docType : {type: Array },
+	showCant:{type: Boolean},
+	directSale:{type: Boolean},
+	quickPrint:{type: Boolean},
+	showMultiItems:{type: Boolean},
+	formatShareA4:{type: Boolean},
+	formatPrintA4:{type: Boolean},
+	itemsIgv:{type: Boolean},
+	defaultText: { type: String },
+	items: {type: Array}
 });
 
 module.exports = User = mongoose.model("user", userSchema);

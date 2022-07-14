@@ -8,7 +8,7 @@ const transSchema = new mongoose.Schema({
 	amount: { type: Number },
 	description: { type: String },
 	type: { type: String },
-	pdfLink: {type: String},
+	pdfLink: {type: Array},
 	createdAt : {type: String}
 }
 );

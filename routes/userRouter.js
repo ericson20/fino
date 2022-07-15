@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
       showCant: true,
       directSale:false,
       quickPrint:false,
-      showMultiItems:false,
+      showMultiItems:true,
       formatShareA4:false,
       formatPrintA4:false,
       itemsIgv:false,
@@ -228,7 +228,7 @@ router.put('/updateProfile', async (req, res) => {
 router.post('/items/add', async (req, res) =>{
   const filter = { email : req.body.email};
   const update = req.body.item;
-  const result  = await User.findOneAndUpdate(filter, { $addToSet: { items: update }}, (err, doc, res)=> {
+  const result  = await User.findOneAndUpdate(filter, { $addToSet: { items: update}}, (err, doc, res)=> {
     return doc;
   });
   res.json(result)

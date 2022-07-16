@@ -14,7 +14,7 @@ router.post("/create", async (req, res) => {
       }
     })
     if(flag){
-      res.json({ msg: "A customer with this number already exists.", status: 400 });
+      res.json({ msg: "Ya existe un cliente con este número.", status: 400 });
     }else{
       const newCustomer = new Customer({
         name: name,

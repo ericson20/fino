@@ -12,7 +12,7 @@ router.post("/register", async (req, res) => {
     // const existingUser = await User.findOne({email : email});
     if (existingUser)
       return res
-        .json({ msg: "An account with this ID already exists.", status: 400 });
+        .json({ msg: "Este email ya está registrado", status: 400 });
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
     // Check if User ID exist.
     if (!user) 
       return res
-        .json({ msg: "No account with this ID has been registered.", status: 'No User' });
+        .json({ msg: "No se ha registrado ninguna cuenta con este ID", status: 'No User' });
 
     // Check if Password is correct.
     const isMatch = await bcrypt.compare(password, user.password);
@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
     // Check if User is active.
     if (!activeStatus)
       return res
-        .json({ msg: "You are not actived.", status: 'No Active' });
+        .json({ msg: "No estás activado.", status: 'No Active' });
 
     // when login is succes
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);

@@ -63,12 +63,12 @@ router.post("/login", async (req, res) => {
 
     // Check if Password is correct.
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.json({ msg: "Lo sentimos, la contraseña no es correcta", status: 'Wrong Password' });
+    if (!isMatch) return res.json({ msg: "Sorry, Password is not correct.", status: 'Wrong Password' });
 
     // Check if User is active.
     if (!activeStatus)
       return res
-        .json({ msg: "No estás activado.", status: 'No Active' });
+        .json({ msg: "No estás activado", status: 'No Active' });
 
     // when login is succes
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);

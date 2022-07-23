@@ -21,7 +21,8 @@ router.post("/create", async (req, res) => {
         doc: doc,
         direction: direction,
         sellerId: sellerId,
-        docType : docType
+        docType : docType,
+        frequent: 0
       });
       const savedCustomer = await newCustomer.save();
       res.json({status: 200});
@@ -47,7 +48,8 @@ router.get("/all/:id", async (req, res) => {
       sellerId: customer.sellerId,
       date: customer.createdAt,
       direction : customer.direction,
-      docType: customer.docType
+      docType: customer.docType,
+      frequent: customer.frequent
     };
     customerMaps.push(customerMap);
   }));

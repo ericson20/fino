@@ -7,7 +7,7 @@ const { findOneAndUpdate } = require("../models/userModel");
 
 router.post("/register", async (req, res) => {
   try {
-    let { name, ruc, branch, token, email, vendor, process, credit, paid, password, docType} = req.body;
+    let { name, ruc, branch, token, email, vendor, process, credit, paid, password, docType, phoneNumber} = req.body;
      const existingUser = await User.findOne({ email: { $regex : new RegExp(email, "i")}});
     // const existingUser = await User.findOne({email : email});
     if (existingUser)
@@ -37,6 +37,7 @@ router.post("/register", async (req, res) => {
       formatPrintA4:false,
       itemsIgv:false,
       defaultText: '',
+      phoneNumber, phoneNumber,
       items: []
     });
     await newUser.save();
@@ -203,7 +204,7 @@ router.get('/get/:id', async (req, res) => {
 router.put('/update', async (req, res) => {
   
   const filter = { _id: req.body.id };
-  const update = { name: req.body.name, ruc: req.body.ruc, branch: req.body.branch, token: req.body.token, vendor: req.body.vendor, process: req.body.process, credit: req.body.credit, paid: req.body.paid, email: req.body.email, docType : [req.body.docType.invoice, req.body.docType.ticket, req.body.docType.note] };
+  const update = { name: req.body.name, ruc: req.body.ruc, branch: req.body.branch, token: req.body.token, vendor: req.body.vendor, process: req.body.process, credit: req.body.credit, paid: req.body.paid, email: req.body.email, docType : [req.body.docType.invoice, req.body.docType.ticket, req.body.docType.note], phoneNumber : req.body.phoneNumber };
   const user = await User.findOneAndUpdate(filter, update);
   res.json(user);
 

@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const Trans = require("../models/transModel");
-
-const request = require('request');
+const Customer = require('../models/customerModel')
 
 router.post("/create", async (req, res) => {
   try {
@@ -17,8 +16,10 @@ router.post("/create", async (req, res) => {
       pdfLink: pdfLink,
       sellerId: sellerId,
       createdAt: date,
-      type: type
+      type: type,
+      cancelled: false
     });
+    let result = await Customer.findOneAndUpdate({_id: customerId}, {$inc : {'frequent' : 1}}, {new : true}).exec()
     await newTrans.save();
     res.json({status: 200});
   } catch (err) {
@@ -44,7 +45,8 @@ router.get("/all/:id", async (req, res) => {
       amount: tran.amount,
       type: tran.type,
       date: tran.createdAt,
-      pdfLink: tran.pdfLink
+      pdfLink: tran.pdfLink,
+      cancelled: tran.cancelled
     };
     tranMaps.push(tranMap);
   }));
@@ -52,6 +54,13 @@ router.get("/all/:id", async (req, res) => {
   res.json(tranMaps);
 });
 
+router.put('/cancel', async (req, res) => {
+  
+  const filter = { _id: req.body.id };
+  const update = { cancelled : true };
+  const trans = await Trans.findOneAndUpdate(filter, update);
+  res.json(trans);
 
+});
 
 module.exports = router;

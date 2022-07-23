@@ -5,7 +5,8 @@ const customerSchema = new mongoose.Schema({
 	name: { type: String },
 	doc: { type: String },
 	direction: { type: String },
-	docType: {type: String}
+	docType: {type: String},
+	frequent: { type: Number}
 },
 { timestamps: { createdAt: true }},
 );

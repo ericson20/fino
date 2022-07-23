@@ -21,7 +21,8 @@ const userSchema = new mongoose.Schema({
 	formatPrintA4:{type: Boolean},
 	itemsIgv:{type: Boolean},
 	defaultText: { type: String },
-	items: {type: Array}
+	items: {type: Array},
+	phoneNumber : {type: Number}
 });
 
 module.exports = User = mongoose.model("user", userSchema);

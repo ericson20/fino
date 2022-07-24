@@ -19,7 +19,10 @@ router.post("/create", async (req, res) => {
       type: type,
       cancelled: false
     });
-    let result = await Customer.findOneAndUpdate({_id: customerId}, {$inc : {'frequent' : 1}}, {new : true}).exec()
+    if(name !== 'Invited'){
+      let result = await Customer.findOneAndUpdate({_id: customerId}, {$inc : {'frequent' : 1}}, {new : true}).exec()
+    }
+ 
     await newTrans.save();
     res.json({status: 200});
   } catch (err) {
